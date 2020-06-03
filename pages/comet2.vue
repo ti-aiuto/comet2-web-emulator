@@ -32,51 +32,63 @@
           <tbody>
             <tr>
               <td style="width: 50%">PC</td>
-              <td style="width: 50%">{{ register.getProgramCounter() }}</td>
+              <td style="width: 25%">{{ register.getProgramCounter() }}</td>
+              <td style="width: 25%">{{ toWordHex(register.getProgramCounter()) }}</td>
             </tr>
             <tr>
               <td>OF</td>
               <td>{{ register.getOverflowFlag() }}</td>
+              <td>{{ toWordHex(register.getOverflowFlag()) }}</td>
             </tr>
             <tr>
               <td>SF</td>
               <td>{{ register.getSignFlag() }}</td>
+              <td>{{ toWordHex(register.getSignFlag()) }}</td>
             </tr>
             <tr>
               <td>ZF</td>
               <td>{{ register.getZeroFlag() }}</td>
+              <td>{{ toWordHex(register.getZeroFlag()) }}</td>
             </tr>
             <tr>
               <td>GR0</td>
               <td>{{ register.getGRAt(0) }}</td>
+              <td>{{ toWordHex(register.getGRAt(0)) }}</td>
             </tr>
             <tr>
               <td>GR1</td>
               <td>{{ register.getGRAt(1) }}</td>
+              <td>{{ toWordHex(register.getGRAt(1)) }}</td>
             </tr>
             <tr>
               <td>GR2</td>
               <td>{{ register.getGRAt(2) }}</td>
+              <td>{{ toWordHex(register.getGRAt(2)) }}</td>
             </tr>
             <tr>
               <td>GR3</td>
               <td>{{ register.getGRAt(3) }}</td>
+              <td>{{ toWordHex(register.getGRAt(3)) }}</td>
             </tr>
             <tr>
               <td>GR4</td>
               <td>{{ register.getGRAt(4) }}</td>
+              <td>{{ toWordHex(register.getGRAt(4)) }}</td>
             </tr>
             <tr>
               <td>GR5</td>
               <td>{{ register.getGRAt(5) }}</td>
+              <td>{{ toWordHex(register.getGRAt(5)) }}</td>
             </tr>
             <tr>
               <td>GR6</td>
               <td>{{ register.getGRAt(6) }}</td>
+              <td>{{ toWordHex(register.getGRAt(6)) }}</td>
             </tr>
             <tr>
               <td>GR7</td>
               <td>{{ register.getGRAt(7) }}</td>
+              <td>{{ toWordHex(register.getGRAt(7)) }}</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -174,6 +186,7 @@ export default Vue.extend({
       this.hasNext = false;
       this.generateMemoryDebugInfo();
     },
+    toWordHex, 
     loadSource(index: number) {
       this.source = castle2Examples[index];
       this.init();
