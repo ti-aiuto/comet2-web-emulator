@@ -9,6 +9,10 @@
     <v-btn color="primary" @click="executeNext" :disabled="!hasNext"
       >次の命令を実行</v-btn
     >
+    <br />
+    <v-btn @click="loadSource(0)">最小公倍数を求めるやつ</v-btn>
+    <v-btn @click="loadSource(1)">なんか課題できたやつ</v-btn>
+    <v-btn @click="loadSource(2)">入出力の動作確認用</v-btn>
 
     <h3>ログ</h3>
     <div class="log-messages">
@@ -128,7 +132,7 @@ export default Vue.extend({
   data() {
     const io = new IO(
       async function() {
-        return window.prompt("結果を入力") || "";
+        return window.prompt("ascii文字を入力") || "";
       },
       async function(value: string) {
         alert(value);
@@ -161,6 +165,9 @@ export default Vue.extend({
       this.register = new Register();
       this.machine = new Machine(this.memory, this.register, this.io);
       this.controller = this.machine.executeInteractive(0);
+    },
+    loadSource(index: number) {
+      this.source = castle2Examples[index];
     },
     loadAndcompile() {
       this.init();

@@ -42,5 +42,15 @@ export const castle2Examples = [
     ["NUM", "DC", "11, 2, 36, 3, 4", ""],
     ["SIZE", "DC", "5", ""],
     ["", "END", "", ""],
+  ],
+  [
+    ['REP2', 'START', '', ''],
+    ['', 'IN', 'AREA, LENGTH', ''],
+    ['', 'LD', 'GR0, LENGTH', ''],
+    ['', 'OUT', 'AREA, LENGTH', ''],
+    ['FIN', 'RET', '', ''],
+    ['AREA', 'DS', '20', ''],
+    ['LENGTH', 'DC', '1', ''],
+    ['', 'END', '', '']
   ]
 ];
