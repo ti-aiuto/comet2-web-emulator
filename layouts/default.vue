@@ -9,3 +9,6 @@
     </v-content>
   </v-app>
 </template>
+
+<style scoped>
+</style>
