@@ -20,6 +20,10 @@
         </tr>
       </tbody>
     </v-simple-table>
+
+    <v-alert v-for="log of logMessages" type="info" dense="dense">
+      {{ log }}
+    </v-alert>
   </v-container>
 </template>
 <script lang="ts">
@@ -83,9 +87,15 @@ export default Vue.extend({
         this.source,
         labelMap
       );
-      compiler.compile();
-      this.addrToSourceIndexMap = compiler.addrToSourceIndexMap();
-      this.generateMemoryDebugInfo();
+      try {
+        compiler.compile();
+        this.addrToSourceIndexMap = compiler.addrToSourceIndexMap();
+        this.generateMemoryDebugInfo();
+        this.log("コンパイル完了");
+      } catch (e) {
+        this.log("コンパイル失敗");
+        this.log(e);
+      }
     },
     log(message: string) {
       this.logMessages.unshift(message);
