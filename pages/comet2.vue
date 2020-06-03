@@ -10,6 +10,19 @@
       >次の命令を実行</v-btn
     >
 
+    <h3>ログ</h3>
+    <div class="log-messages">
+      <v-alert
+        v-for="(logMessage, index) of logMessages"
+        :key="index"
+        type="info"
+        dense="dense"
+        outlined="outlined"
+      >
+        {{ logMessage }}
+      </v-alert>
+    </div>
+
     <v-row>
       <v-col cols="6">
         <h3>メモリ</h3>
@@ -26,7 +39,7 @@
       </v-col>
       <v-col cols="3">
         <h3>レジスタ</h3>
-        <v-simple-table>
+        <v-simple-table dense="dense">
           <tbody>
             <tr>
               <td>PC</td>
@@ -93,20 +106,6 @@
             </tr>
           </tbody>
         </v-simple-table>
-      </v-col>
-
-      <v-col cols="6">
-        <h3>ログ</h3>
-        <div class="log-messages">
-          <v-alert
-            v-for="(logMessage, index) of logMessages"
-            :key="index"
-            type="info"
-            dense="dense"
-          >
-            {{ logMessage }}
-          </v-alert>
-        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -185,7 +184,7 @@ export default Vue.extend({
       }
     },
     log(message: string) {
-      this.logMessages.unshift(message);
+      this.logMessages.unshift(`${new Date().toISOString()} ${message}`);
     },
     generateMemoryDebugInfo() {
       this.memoryDebugInfo = memoryDebugInfo(
@@ -218,7 +217,7 @@ export default Vue.extend({
 
 <style scoped>
 .log-messages {
-  max-height: 600px;
+  height: 200px;
   overflow: auto;
 }
 </style>
