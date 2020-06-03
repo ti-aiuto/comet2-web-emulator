@@ -150,9 +150,13 @@ export default Vue.extend({
         return;
       }
       try {
-        this.hasNext = await this.controller.executeNext();
+        const result = await this.controller.executeNext();
+        this.hasNext = result;
         this.log("一命令実行しました。");
         this.generateMemoryDebugInfo();
+        if (!result) {
+          this.log('実行完了');
+        }
       } catch (e) {
         this.hasNext = false;
         this.log("実行に失敗しました。");
