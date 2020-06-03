@@ -1,13 +1,14 @@
 <template>
   <v-container>
-
     <p>
-      ソース<br>
-      https://github.com/ti-aiuto/comet2-emulator<br>
-      https://github.com/ti-aiuto/comet2-web-emulator<br>
+      ソース<br />
+      https://github.com/ti-aiuto/comet2-emulator<br />
+      https://github.com/ti-aiuto/comet2-web-emulator<br />
     </p>
     <v-btn @click="loadAndcompile">コンパイル実行</v-btn>
-    <v-btn color="primary" @click="executeNext" :disabled="!hasNext">次の命令を実行</v-btn>
+    <v-btn color="primary" @click="executeNext" :disabled="!hasNext"
+      >次の命令を実行</v-btn
+    >
 
     <v-row>
       <v-col cols="6">
@@ -26,7 +27,56 @@
       <v-col cols="3">
         <h3>レジスタ</h3>
         <v-simple-table>
-
+          <tbody>
+            <tr>
+              <td>PC</td>
+              <td>{{ register.getProgramCounter() }}</td>
+            </tr>
+            <tr>
+              <td>OF</td>
+              <td>{{ register.getOverflowFlag() }}</td>
+            </tr>
+            <tr>
+              <td>SF</td>
+              <td>{{ register.getSignFlag() }}</td>
+            </tr>
+            <tr>
+              <td>ZF</td>
+              <td>{{ register.getZeroFlag() }}</td>
+            </tr>
+            <tr>
+              <td>GR0</td>
+              <td>{{ register.getGRAt(0) }}</td>
+            </tr>
+            <tr>
+              <td>GR1</td>
+              <td>{{ register.getGRAt(1) }}</td>
+            </tr>
+            <tr>
+              <td>GR2</td>
+              <td>{{ register.getGRAt(2) }}</td>
+            </tr>
+            <tr>
+              <td>GR3</td>
+              <td>{{ register.getGRAt(3) }}</td>
+            </tr>
+            <tr>
+              <td>GR4</td>
+              <td>{{ register.getGRAt(4) }}</td>
+            </tr>
+            <tr>
+              <td>GR5</td>
+              <td>{{ register.getGRAt(5) }}</td>
+            </tr>
+            <tr>
+              <td>GR6</td>
+              <td>{{ register.getGRAt(6) }}</td>
+            </tr>
+            <tr>
+              <td>GR7</td>
+              <td>{{ register.getGRAt(7) }}</td>
+            </tr>
+          </tbody>
         </v-simple-table>
       </v-col>
     </v-row>
@@ -105,8 +155,7 @@ export default Vue.extend({
       hasNext: false,
     };
   },
-  created() {
-  },
+  created() {},
   methods: {
     init() {
       this.memory = new Memory();
@@ -155,7 +204,7 @@ export default Vue.extend({
         this.log("一命令実行しました。");
         this.generateMemoryDebugInfo();
         if (!result) {
-          this.log('実行完了');
+          this.log("実行完了");
         }
       } catch (e) {
         this.hasNext = false;
@@ -168,8 +217,8 @@ export default Vue.extend({
 </script>
 
 <style scoped>
-  .log-messages {
-    max-height: 600px;
-    overflow: auto;;
-  }
+.log-messages {
+  max-height: 600px;
+  overflow: auto;
+}
 </style>
