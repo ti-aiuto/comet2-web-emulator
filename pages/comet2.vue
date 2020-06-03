@@ -31,8 +31,8 @@
         <v-simple-table dense="dense">
           <tbody>
             <tr>
-              <td>PC</td>
-              <td>{{ register.getProgramCounter() }}</td>
+              <td style="width: 50%">PC</td>
+              <td style="width: 50%">{{ register.getProgramCounter() }}</td>
             </tr>
             <tr>
               <td>OF</td>
