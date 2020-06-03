@@ -1,6 +1,13 @@
 <template>
   <v-container>
-    <v-btn type="primary" @click="executeNext">次の命令を実行</v-btn>
+
+    <p>
+      ソース<br>
+      https://github.com/ti-aiuto/comet2-emulator<br>
+      https://github.com/ti-aiuto/comet2-web-emulator<br>
+    </p>
+    <v-btn @click="loadAndcompile">コンパイル実行</v-btn>
+    <v-btn color="primary" @click="executeNext" :disabled="!hasNext">次の命令を実行</v-btn>
 
     <v-row>
       <v-col cols="6">
@@ -18,6 +25,9 @@
       </v-col>
       <v-col cols="3">
         <h3>レジスタ</h3>
+        <v-simple-table>
+
+        </v-simple-table>
       </v-col>
     </v-row>
 
@@ -96,7 +106,6 @@ export default Vue.extend({
     };
   },
   created() {
-    this.loadAndcompile();
   },
   methods: {
     init() {
