@@ -5,14 +5,12 @@
       https://github.com/ti-aiuto/comet2-emulator<br />
       https://github.com/ti-aiuto/comet2-web-emulator<br />
     </p>
-    <v-btn @click="loadAndcompile">コンパイル実行</v-btn>
-    <v-btn color="primary" @click="executeNext" :disabled="!hasNext"
-      >次の命令を実行</v-btn
-    >
-    <br />
-    <v-btn @click="loadSource(0)">最小公倍数を求めるやつ</v-btn>
-    <v-btn @click="loadSource(1)">なんか課題できたやつ</v-btn>
-    <v-btn @click="loadSource(2)">入出力の動作確認用</v-btn>
+    <div>
+      <v-btn @click="loadAndcompile">コンパイル実行</v-btn>
+      <v-btn color="primary" @click="executeNext" :disabled="!hasNext"
+        >次の命令を実行</v-btn
+      >
+    </div>
 
     <h3>ログ</h3>
     <div class="log-messages">
@@ -99,7 +97,7 @@
     </v-row>
 
     <v-row>
-      <v-col cols="6">
+      <v-col cols="12" md="6">
         <h3>ソース</h3>
         <v-simple-table dense="dense">
           <tbody>
@@ -110,6 +108,14 @@
             </tr>
           </tbody>
         </v-simple-table>
+      </v-col>
+      <v-col cols="12" md="6">
+        <h3>ソース読み込み</h3>
+        <div>
+          <v-btn @click="loadSource(0)">最小公倍数を求めるやつ</v-btn>
+          <v-btn @click="loadSource(1)">なんか課題できたやつ</v-btn>
+          <v-btn @click="loadSource(2)">入出力の動作確認用</v-btn>
+        </div>
       </v-col>
     </v-row>
   </v-container>
@@ -165,9 +171,11 @@ export default Vue.extend({
       this.register = new Register();
       this.machine = new Machine(this.memory, this.register, this.io);
       this.controller = this.machine.executeInteractive(0);
+      this.hasNext = false;
     },
     loadSource(index: number) {
       this.source = castle2Examples[index];
+      this.init();
     },
     loadAndcompile() {
       this.init();
