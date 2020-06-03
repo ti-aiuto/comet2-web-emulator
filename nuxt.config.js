@@ -1,5 +1,3 @@
 module.exports = {
-  buildModules: [
-    "@nuxtjs/vuetify"
-  ]
+  buildModules: ["@nuxtjs/vuetify", "@nuxt/typescript-build"],
 };
