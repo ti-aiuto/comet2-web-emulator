@@ -1,5 +1,26 @@
 <template>
-  <v-container> </v-container>
+  <v-container>
+    <v-simple-table dense="dense">
+      <tbody>
+        <tr v-for="row of source">
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+        </tr>
+      </tbody>
+    </v-simple-table>
+
+    <v-simple-table dense="dense">
+      <tbody>
+        <tr v-for="row of memoryDebugInfo">
+          <td>{{ row[0] }}</td>
+          <td>{{ row[1] }}</td>
+          <td>{{ row[2] }}</td>
+          <td>{{ row[3] }}</td>
+        </tr>
+      </tbody>
+    </v-simple-table>
+  </v-container>
 </template>
 <script lang="ts">
 import Vue from "vue";
@@ -30,14 +51,21 @@ export default Vue.extend({
     const register = new Register();
     const machine = new Machine(memory, register, io);
 
+    const source = castle2Examples[0];
+
     return {
       io,
       memory,
       register,
       machine,
-      source: castle2Examples[0],
-      logMessages: [] as string[]
+      source,
+      logMessages: [] as string[],
+      memoryDebugInfo: memoryDebugInfo(memory.dump(), {}, source),
+      addrToSourceIndexMap: {},
     };
+  },
+  created() {
+    this.loadAndcompile();
   },
   methods: {
     init() {
@@ -46,6 +74,7 @@ export default Vue.extend({
       this.machine = new Machine(this.memory, this.register, this.io);
     },
     loadAndcompile() {
+      this.init();
       const firstAddress = 0;
       const labelMap = {};
       const compiler = new Compiler(
@@ -54,11 +83,20 @@ export default Vue.extend({
         this.source,
         labelMap
       );
-      const addrToSourceIndexMap = compiler.addrToSourceIndexMap();
+      compiler.compile();
+      this.addrToSourceIndexMap = compiler.addrToSourceIndexMap();
+      this.generateMemoryDebugInfo();
     },
     log(message: string) {
       this.logMessages.unshift(message);
-    }
+    },
+    generateMemoryDebugInfo() {
+      this.memoryDebugInfo = memoryDebugInfo(
+        this.memory.dump(),
+        this.addrToSourceIndexMap,
+        this.source
+      );
+    },
   },
 });
 </script>
