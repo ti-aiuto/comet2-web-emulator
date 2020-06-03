@@ -1,9 +1,9 @@
 <template>
   <v-container>
+    <h2>簡易COMET2エミュレータ</h2>
     <p>
-      ソース<br />
-      https://github.com/ti-aiuto/comet2-emulator<br />
-      https://github.com/ti-aiuto/comet2-web-emulator<br />
+      <a href="https://github.com/ti-aiuto/comet2-emulator" target="_blank">https://github.com/ti-aiuto/comet2-emulator</a><br />
+      <a href="https://github.com/ti-aiuto/comet2-web-emulator" target="_blank">https://github.com/ti-aiuto/comet2-web-emulator</a><br />
     </p>
     <div>
       <v-btn @click="loadAndcompile">コンパイル実行</v-btn>
