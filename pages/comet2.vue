@@ -21,9 +21,17 @@
       </tbody>
     </v-simple-table>
 
-    <v-alert v-for="log of logMessages" type="info" dense="dense">
-      {{ log }}
+    <v-alert
+      v-for="(logMessage, index) of logMessages"
+      :key="index"
+      type="info"
+      dense="dense"
+    >
+      {{ logMessage }}
     </v-alert>
+
+    <button>
+    </button>
   </v-container>
 </template>
 <script lang="ts">
@@ -63,9 +71,11 @@ export default Vue.extend({
       register,
       machine,
       source,
+      controller: machine.executeInteractive(0),
       logMessages: [] as string[],
       memoryDebugInfo: memoryDebugInfo(memory.dump(), {}, source),
       addrToSourceIndexMap: {},
+      hasNext: false,
     };
   },
   created() {
@@ -76,6 +86,7 @@ export default Vue.extend({
       this.memory = new Memory();
       this.register = new Register();
       this.machine = new Machine(this.memory, this.register, this.io);
+      this.controller = this.machine.executeInteractive(0);
     },
     loadAndcompile() {
       this.init();
@@ -92,6 +103,7 @@ export default Vue.extend({
         this.addrToSourceIndexMap = compiler.addrToSourceIndexMap();
         this.generateMemoryDebugInfo();
         this.log("コンパイル完了");
+        this.hasNext = true;
       } catch (e) {
         this.log("コンパイル失敗");
         this.log(e);
@@ -106,6 +118,20 @@ export default Vue.extend({
         this.addrToSourceIndexMap,
         this.source
       );
+    },
+    async executeNext() {
+      if (!this.hasNext) {
+        return;
+      }
+      try {
+        this.hasNext = await this.controller.executeNext();
+        this.log("一命令実行しました。");
+        this.generateMemoryDebugInfo();
+      } catch (e) {
+        this.hasNext = false;
+        this.log("実行に失敗しました。");
+        this.log(e);
+      }
     },
   },
 });
