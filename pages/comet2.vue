@@ -255,7 +255,7 @@ export default Vue.extend({
         {
           hid: "description",
           name: "description",
-          content: "部員・OBOGによるディベート講座の一覧です。",
+          content: "ソースのコンパイル、メモリへの配置、機械語命令の実行を一通りやります。ソースをみればTSとアセンブラとオブジェクト指向設計とデザインパターン少しが学べるお得なコンテンツ",
         },
       ],
     };
