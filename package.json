@@ -1,5 +1,5 @@
 {
-  "name": "jdbase",
+  "name": "comet2-web-emulator",
   "version": "1.0.0",
   "description": "JDBの基礎構造を抜き出したフレームワーク",
   "main": "index.js",
