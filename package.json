@@ -32,6 +32,7 @@
     "typescript": "^3.9.3"
   },
   "dependencies": {
-    "nuxt": "^2.12.2"
+    "nuxt": "^2.12.2",
+    "ts-comet2-emulator": "../comet2-emulator/"
   }
 }
