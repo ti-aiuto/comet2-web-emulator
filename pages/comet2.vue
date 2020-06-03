@@ -85,7 +85,7 @@
         <h3>メモリ</h3>
         <v-simple-table dense="dense">
           <tbody>
-            <tr v-for="row of memoryDebugInfo">
+            <tr v-for="row of memoryDebugInfo" :class="memoryRowClass(row)">
               <td>{{ row[0] }}</td>
               <td>{{ row[1] }}</td>
               <td>{{ row[2] }}</td>
@@ -172,6 +172,7 @@ export default Vue.extend({
       this.machine = new Machine(this.memory, this.register, this.io);
       this.controller = this.machine.executeInteractive(0);
       this.hasNext = false;
+      this.generateMemoryDebugInfo();
     },
     loadSource(index: number) {
       this.source = castle2Examples[index];
@@ -225,6 +226,13 @@ export default Vue.extend({
         this.log("実行に失敗しました。");
         this.log(e);
       }
+    },
+    memoryRowClass(row: any) {
+      const flag = Number.parseInt(row[0], 16) === Number(this.register.getProgramCounter());
+      return {
+        "light-green": flag,
+        "lighten-4": flag
+      };
     },
   },
 });
