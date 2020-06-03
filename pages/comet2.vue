@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <h2>簡易COMET2エミュレータ</h2>
+    <h2>TS製簡易COMET2エミュレータ</h2>
     <p>
       <a href="https://github.com/ti-aiuto/comet2-emulator" target="_blank">https://github.com/ti-aiuto/comet2-emulator</a><br />
       <a href="https://github.com/ti-aiuto/comet2-web-emulator" target="_blank">https://github.com/ti-aiuto/comet2-web-emulator</a><br />
@@ -247,6 +247,18 @@ export default Vue.extend({
         "lighten-4": flag
       };
     },
+  },   
+  head() {
+    return {
+      title: "TS製簡易COMET2エミュレータ",
+      meta: [
+        {
+          hid: "description",
+          name: "description",
+          content: "部員・OBOGによるディベート講座の一覧です。",
+        },
+      ],
+    };
   },
 });
 </script>
