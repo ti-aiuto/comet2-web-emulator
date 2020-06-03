@@ -24,20 +24,7 @@
     </div>
 
     <v-row>
-      <v-col cols="6">
-        <h3>メモリ</h3>
-        <v-simple-table dense="dense">
-          <tbody>
-            <tr v-for="row of memoryDebugInfo">
-              <td>{{ row[0] }}</td>
-              <td>{{ row[1] }}</td>
-              <td>{{ row[2] }}</td>
-              <td>{{ row[3] }}</td>
-            </tr>
-          </tbody>
-        </v-simple-table>
-      </v-col>
-      <v-col cols="3">
+      <v-col cols="12" md="6">
         <h3>レジスタ</h3>
         <v-simple-table dense="dense">
           <tbody>
@@ -88,6 +75,19 @@
             <tr>
               <td>GR7</td>
               <td>{{ register.getGRAt(7) }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-col>
+      <v-col cols="12" md="6">
+        <h3>メモリ</h3>
+        <v-simple-table dense="dense">
+          <tbody>
+            <tr v-for="row of memoryDebugInfo">
+              <td>{{ row[0] }}</td>
+              <td>{{ row[1] }}</td>
+              <td>{{ row[2] }}</td>
+              <td>{{ row[3] }}</td>
             </tr>
           </tbody>
         </v-simple-table>
@@ -217,7 +217,7 @@ export default Vue.extend({
 
 <style scoped>
 .log-messages {
-  height: 200px;
+  height: 100px;
   overflow: auto;
 }
 </style>
