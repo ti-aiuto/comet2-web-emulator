@@ -1,5 +1,7 @@
 <template>
   <v-container>
+    <v-btn type="primary" @click="executeNext">次の命令を実行</v-btn>
+
     <v-simple-table dense="dense">
       <tbody>
         <tr v-for="row of source">
@@ -29,9 +31,6 @@
     >
       {{ logMessage }}
     </v-alert>
-
-    <button>
-    </button>
   </v-container>
 </template>
 <script lang="ts">
