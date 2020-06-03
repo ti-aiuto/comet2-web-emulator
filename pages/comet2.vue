@@ -2,35 +2,53 @@
   <v-container>
     <v-btn type="primary" @click="executeNext">次の命令を実行</v-btn>
 
-    <v-simple-table dense="dense">
-      <tbody>
-        <tr v-for="row of source">
-          <td>{{ row[0] }}</td>
-          <td>{{ row[1] }}</td>
-          <td>{{ row[2] }}</td>
-        </tr>
-      </tbody>
-    </v-simple-table>
+    <v-row>
+      <v-col cols="6">
+        <h3>メモリ</h3>
+        <v-simple-table dense="dense">
+          <tbody>
+            <tr v-for="row of memoryDebugInfo">
+              <td>{{ row[0] }}</td>
+              <td>{{ row[1] }}</td>
+              <td>{{ row[2] }}</td>
+              <td>{{ row[3] }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-col>
+      <v-col cols="3">
+        <h3>レジスタ</h3>
+      </v-col>
+    </v-row>
 
-    <v-simple-table dense="dense">
-      <tbody>
-        <tr v-for="row of memoryDebugInfo">
-          <td>{{ row[0] }}</td>
-          <td>{{ row[1] }}</td>
-          <td>{{ row[2] }}</td>
-          <td>{{ row[3] }}</td>
-        </tr>
-      </tbody>
-    </v-simple-table>
+    <v-row>
+      <v-col cols="6">
+        <h3>ソース</h3>
+        <v-simple-table dense="dense">
+          <tbody>
+            <tr v-for="row of source">
+              <td>{{ row[0] }}</td>
+              <td>{{ row[1] }}</td>
+              <td>{{ row[2] }}</td>
+            </tr>
+          </tbody>
+        </v-simple-table>
+      </v-col>
 
-    <v-alert
-      v-for="(logMessage, index) of logMessages"
-      :key="index"
-      type="info"
-      dense="dense"
-    >
-      {{ logMessage }}
-    </v-alert>
+      <v-col cols="6">
+        <h3>ログ</h3>
+        <div class="log-messages">
+          <v-alert
+            v-for="(logMessage, index) of logMessages"
+            :key="index"
+            type="info"
+            dense="dense"
+          >
+            {{ logMessage }}
+          </v-alert>
+        </div>
+      </v-col>
+    </v-row>
   </v-container>
 </template>
 <script lang="ts">
@@ -135,3 +153,10 @@ export default Vue.extend({
   },
 });
 </script>
+
+<style scoped>
+  .log-messages {
+    max-height: 600px;
+    overflow: auto;;
+  }
+</style>
